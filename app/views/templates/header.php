@@ -18,7 +18,7 @@
          <div class="navbar-nav">
             <a class="nav-item nav-link active" href="<?= BASEURL; ?>">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="<?= BASEURL; ?>/about">Abaout</a>
-            <a class="nav-item nav-link" href="#">Pricing</a>
+            <a class="nav-item nav-link" href="<?= BASEURL; ?>/temen">Temen</a>
             <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
          </div>
       </div>
