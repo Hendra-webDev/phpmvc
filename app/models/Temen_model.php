@@ -2,25 +2,39 @@
 
 class Temen_model
 {
-   private $dbh; //database handler
-   private $stmt; //buat simpan query
+   private $table = 'temen';
+   private $db;
 
    public function __construct()
    {
-      $dsn = 'mysql:host=localhost;dbname=phpmvc'; //data source name
-
-      try { //menyambungkan databasenya
-         $this->dbh = new PDO($dsn, 'root', '');
-      } catch (PDOException $e) {
-         die($e->getMessage());
-      }
+      $this->db = new Database;
    }
-
    //method buat mengambil semua data mahasiswa
    public function getAllTemen()
    {
-      $this->stmt = $this->dbh->prepare('SELECT * FROM temen'); //prepare dulu querynya
-      $this->stmt->execute(); //setelah itu execute
-      return $this->stmt->fetchAll(PDO::FETCH_ASSOC); //mengambil data
+      $this->db->query('SELECT * FROM ' . $this->table);
+      return $this->db->resulSet();
+   }
+
+   public function getTemenById($id)
+   {
+      $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id '); //untuk menyimpan data yg di bind
+      $this->db->bind('id', $id);
+      return $this->db->single();
+   }
+
+   public function tambahDataTemen($data)
+   {
+      $query = "INSERT INTO temen 
+               VALUES
+               ('null', :nama, :nim, :jurusan)";
+
+      $this->db->query($query); //menjalankan querynya
+      $this->db->bind('nama', $data['nama']);
+      $this->db->bind('nim', $data['nim']);
+      $this->db->bind('jurusan', $data['jurusan']);
+
+      $this->db->execute();
+      return $this->db->rowCount();
    }
 }
