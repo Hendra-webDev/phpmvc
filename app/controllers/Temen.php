@@ -23,6 +23,24 @@ class Temen extends Controller
    public function tambah()
    {
       if ($this->model('Temen_model')->tambahDataTemen($_POST) > 0) {
+         Flasher::setFlash('berhasil', 'ditambahkan', 'success');
+         header('Location: ' . BASEURL . '/temen');
+         exit;
+      } else {
+         Flasher::setFlash('gagal', 'ditambahkan', 'danger'); //jika gagal
+         header('Location: ' . BASEURL . '/temen');
+         exit;
+      }
+   }
+
+   public function hapus($id)
+   {
+      if ($this->model('Temen_model')->hapusDataTemen($id) > 0) {
+         Flasher::setFlash('berhasil', 'dihapus', 'success');
+         header('Location: ' . BASEURL . '/temen');
+         exit;
+      } else {
+         Flasher::setFlash('gagal', 'dihapus', 'danger'); //jika gagal
          header('Location: ' . BASEURL . '/temen');
          exit;
       }

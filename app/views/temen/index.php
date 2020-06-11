@@ -1,6 +1,11 @@
 <div class="container mt-5">
    <div class="row">
-      <div class="col-6">
+      <div class="col-lg-6">
+         <?php Flasher::flash(); ?>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-lg-6">
          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#forModal">
             Tambah Temen Brengs*k
          </button>
@@ -8,8 +13,9 @@
 
          <?php foreach ($data['tmn'] as $tmn) : ?>
             <ul class="list-group">
-               <li class="list-group-item d-flex justify-content-between align-items-center"><?= $tmn['nama']; ?>
-                  <a href="<?= BASEURL; ?>/temen/detail/<?= $tmn['id']; ?>" class="badge badge-info">detail</a>
+               <li class="list-group-item "><?= $tmn['nama']; ?>
+                  <a href="<?= BASEURL; ?>/temen/hapus/<?= $tmn['id']; ?>" class="badge badge-danger float-right ml-2" onclick="return confirm('yakin mau dihapus ??');">hapus</a>
+                  <a href="<?= BASEURL; ?>/temen/detail/<?= $tmn['id']; ?>" class="badge badge-info float-right ml-2">detail</a>
                </li>
             </ul>
          <?php endforeach; ?>

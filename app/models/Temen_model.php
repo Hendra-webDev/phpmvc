@@ -30,9 +30,19 @@ class Temen_model
                ('null', :nama, :nim, :jurusan)";
 
       $this->db->query($query); //menjalankan querynya
-      $this->db->bind('nama', $data['nama']);
-      $this->db->bind('nim', $data['nim']);
-      $this->db->bind('jurusan', $data['jurusan']);
+      $this->db->bind('nama', htmlspecialchars($data['nama']));
+      $this->db->bind('nim', htmlspecialchars($data['nim']));
+      $this->db->bind('jurusan', htmlspecialchars($data['jurusan']));
+
+      $this->db->execute();
+      return $this->db->rowCount();
+   }
+
+   public function hapusDataTemen($id)
+   {
+      $query = "DELETE FROM temen WHERE id = :id";
+      $this->db->query($query);
+      $this->db->bind('id', $id);
 
       $this->db->execute();
       return $this->db->rowCount();
