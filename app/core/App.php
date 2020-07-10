@@ -9,6 +9,9 @@ class App
    public function __construct()
    {
       $url = $this->parseURL();
+      if ($url == NULL) { // dikarenakan $url[0] nilainya NULL sehingga filenya tidak bisa dicari/dibandingkan{karena pengaruh versi php} 
+         $url = [$this->controller];
+      }
       //   mengecek file yang ada pada controller
       if (file_exists('../app/controllers/' . $url[0] . '.php')) {
          // kita timpa dengan controller yang baru
